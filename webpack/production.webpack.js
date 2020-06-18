@@ -7,13 +7,18 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 module.exports = () => {
   return {
     mode: "production",
-    entry: "./src/index.js",
+    entry: "./src/index.ts",
     output: {
       filename: `${process.env.ENV}-server.js`,
       path: path.resolve("dist"),
     },
     module: {
       rules: [
+        {
+          test: /\.tsx?$/,
+          use: "ts-loader",
+          exclude: /node_modules/,
+        },
         {
           test: /\.(js|jsx)$/,
           exclude: /[\\/]node_modules[\\/]/,
@@ -22,6 +27,9 @@ module.exports = () => {
           },
         },
       ],
+    },
+    resolve: {
+      extensions: [".tsx", ".ts", ".js"],
     },
     plugins: [
       new CleanWebpackPlugin(),

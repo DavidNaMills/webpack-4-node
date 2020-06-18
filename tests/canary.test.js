@@ -3,4 +3,9 @@ describe("the canary meets gas", () => {
     expect.assertions(1);
     expect(true).toBe(true);
   });
+
+  it("process.env.ENV should be 'test'", () => {
+    expect.assertions(1);
+    expect(process.env.ENV).toBe("test");
+  });
 });
